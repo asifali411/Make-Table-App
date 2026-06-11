@@ -1,11 +1,12 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../../shared/components/navbar/Navbar";
+
+const Classes = lazy(() => import("../../pages/Classes"));
 
 // Placeholders
 const Loading        = () => <div>LOADING</div>;
 const Dashboard      = () => <div>DASHBOARD</div>;
-const Classes        = () => <div>CLASSES</div>;
 const Subjects       = () => <div>SUBJECTS</div>;
 const Teachers       = () => <div>TEACHERS</div>;
 const Assignments    = () => <div>ASSIGNMENTS</div>;

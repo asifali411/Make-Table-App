@@ -40,6 +40,10 @@ export default function PageHeader({
             data-state={viewMode === "list" ? "on" : "off"}
             className={styles.toggleButton}
             onClick={() => onViewModeChange?.("list")}
+            style={{
+              borderTopRightRadius: "var(--radius-button)",
+              borderBottomRightRadius: "var(--radius-button)",
+            }}
           >
             <List size={16} strokeWidth={2} />
           </button>
@@ -51,6 +55,10 @@ export default function PageHeader({
             data-state={viewMode === "grid" ? "on" : "off"}
             className={styles.toggleButton}
             onClick={() => onViewModeChange?.("grid")}
+            style={{
+              borderTopLeftRadius: "var(--radius-button)",
+              borderBottomLeftRadius: "var(--radius-button)",
+            }}
           >
             <LayoutGrid size={16} strokeWidth={2} />
           </button>
