@@ -7,11 +7,28 @@ import {
   Settings,
   CircleHelp,
   Calendar,
+  type LucideProps,
 } from "lucide-react";
 import { useNavigate, Outlet } from "react-router-dom";
 import styles from "./styles/Navbar.module.css";
+import { useState } from "react";
 
-const menuItems = [
+// --- Types ------------------------------------------------------------------------
+
+type HrefType = `/${string}`;
+
+interface MenuItem {
+  href: HrefType;
+  label: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
+  >;
+  active?: boolean;
+};
+
+// ------------------------------------------------------------------------
+
+const menuItems: MenuItem[] = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard, active: true },
   { href: "/classes", label: "Classes", icon: BookOpen },
   { href: "/subjects", label: "Subjects", icon: GraduationCap },
@@ -19,18 +36,25 @@ const menuItems = [
   { href: "/assignments", label: "Assignments", icon: Link2 },
 ];
 
-const footerItems = [
+const footerItems: MenuItem[] = [
   { href: "/settings", label: "Settings", icon: Settings },
   { href: "/help", label: "Help & Support", icon: CircleHelp },
 ];
 
+// -------------------------------------------------------------------------
+
 const Navbar = () => {
 
   const navigate = useNavigate();
+  const [acitveLink, setActiveLink] = useState<HrefType>("/");
+
+  const handleNavigation = (href: HrefType) => {
+    setActiveLink(href);
+    navigate(href);
+  };
 
   return (
-    <>
-      <div className={styles.gap} />
+    <div className={styles.app}>
       <div className={styles.sidebarWrapper}>
         <div className={styles.sidebar}>
           <div className={styles.content}>
@@ -48,9 +72,9 @@ const Navbar = () => {
                   <li key={href}>
                     <button
                       className={`${styles.menuButton} ${
-                        active ? styles.menuButtonActive : ""
+                        acitveLink === href ? styles.menuButtonActive : ""
                       }`}
-                      onClick={() => navigate(href)}
+                      onClick={() => handleNavigation(href)}
                       aria-current={active ? "page" : undefined}
                     >
                       <Icon className={styles.menuIcon} />
@@ -67,7 +91,7 @@ const Navbar = () => {
               <ul className={styles.menu}>
                 {footerItems.map(({ href, label, icon: Icon }) => (
                   <li key={href}>
-                    <button className={styles.menuButton} onClick={() => navigate(href)}>
+                    <button className={`${styles.menuButton} ${acitveLink === href ? styles.menuButtonActive : ""}`} onClick={() => handleNavigation(href)}>
                       <Icon className={styles.menuIcon} />
                       <span>{label}</span>
                     </button>
@@ -82,7 +106,7 @@ const Navbar = () => {
       <main>
         <Outlet />
       </main>
-    </>
+    </div>
   );
 }
 

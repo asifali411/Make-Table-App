@@ -1,6 +1,6 @@
 :root {
   --color-gradient-primary:   linear-gradient(135deg, var(--color-primary), color-mix(in srgb, hsl(270 70% 60%) 80%, var(--color-accent)));
-  --color-primary-highlight:  color-mix(in srgb, var(--color-primary) 15%, transparent);
+  --color-primary-highlight:  color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
 :root, [data-theme="light"] {
