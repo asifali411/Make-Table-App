@@ -9,9 +9,10 @@ import {
   Calendar,
   type LucideProps,
 } from "lucide-react";
-import { useNavigate, Outlet } from "react-router-dom";
-import styles from "./styles/Navbar.module.css";
 import { useState } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
+import Topbar from "../topbar/Topbar";
+import styles from "./styles/Navbar.module.css";
 
 // --- Types ------------------------------------------------------------------------
 
@@ -47,6 +48,7 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const [acitveLink, setActiveLink] = useState<HrefType>("/");
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleNavigation = (href: HrefType) => {
     setActiveLink(href);
@@ -55,7 +57,7 @@ const Navbar = () => {
 
   return (
     <div className={styles.app}>
-      <div className={styles.sidebarWrapper}>
+      <section className={styles.sidebarWrapper}>
         <div className={styles.sidebar}>
           <div className={styles.content}>
             <div className={styles.brand}>
@@ -101,11 +103,14 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <main>
-        <Outlet />
-      </main>
+      <section className={styles.right}>
+        <Topbar onToggleSidebar={() => setCollapsed((prev) => !prev)}/>
+          <main>
+            <Outlet />
+          </main>
+      </section>
     </div>
   );
 }
