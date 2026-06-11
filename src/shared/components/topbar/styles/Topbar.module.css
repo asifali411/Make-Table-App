@@ -93,5 +93,5 @@
   font-size: var(--font-size-sm);
   font-weight: 500;
   line-height: 1rem;
-  color: var(--color-text-inverse);
+  color: #fff;
 }

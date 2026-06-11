@@ -124,7 +124,7 @@
   padding: calc(var(--space-1) * 1.5);
   flex-shrink: 0;
   background: var(--color-gradient-primary);
-  color: var(--color-surface);
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,6 +1,6 @@
 import { List, LayoutGrid, Download, Plus } from "lucide-react";
 import type { ViewMode } from "../../types/global.types";
-import styles from "./PageHeader.module.css";
+import styles from "./styles/PageHeader.module.css";
 
 interface PageHeaderProps {
   title: string;
