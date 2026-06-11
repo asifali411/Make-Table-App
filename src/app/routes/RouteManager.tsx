@@ -17,7 +17,8 @@ const RouteManager = () => {
     <Suspense fallback={<Loading />}>
       <Routes>
         <Route element={<Navbar />}>
-          <Route path="/"            element={ <Dashboard />      }></Route>
+          <Route path="/"            element={ <Loading />      }></Route>
+          <Route path="/dashboard"   element={ <Dashboard />      }></Route>
           <Route path="/classes"     element={ <Classes />        }></Route>
           <Route path="/subjects"    element={ <Subjects />       }></Route>
           <Route path="/teachers"    element={ <Teachers />       }></Route>

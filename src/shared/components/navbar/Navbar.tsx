@@ -30,7 +30,7 @@ interface MenuItem {
 // ------------------------------------------------------------------------
 
 const menuItems: MenuItem[] = [
-  { href: "/", label: "Dashboard", icon: LayoutDashboard, active: true },
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, active: true },
   { href: "/classes", label: "Classes", icon: BookOpen },
   { href: "/subjects", label: "Subjects", icon: GraduationCap },
   { href: "/teachers", label: "Teachers", icon: Users },
@@ -47,7 +47,7 @@ const footerItems: MenuItem[] = [
 const Navbar = () => {
 
   const navigate = useNavigate();
-  const [acitveLink, setActiveLink] = useState<HrefType>("/");
+  const [acitveLink, setActiveLink] = useState<HrefType>("/dashboard");
   const [collapsed, setCollapsed] = useState(false);
 
   const handleNavigation = (href: HrefType) => {
