@@ -8,9 +8,11 @@ This document defines the mandatory coding standards for this project (React + T
 
 ```
 src/
+├── api/                 # API client / Tauri command bindings
+├── app/                 # App shell: providers, routing, layout
+│   ├── providers/       # Context providers, app-wide wrappers
+│   └── routes/          # Route definitions / top-level routed views
 ├── assets/              # Static assets (images, fonts, icons)
-├── components/          # Reusable, generic UI components
-│   └── ...
 ├── features/            # Feature-scoped modules (domain logic + UI)
 │   └── timetable/
 │       ├── components/
@@ -18,15 +20,17 @@ src/
 │       ├── utils/
 │       ├── types.ts
 │       └── index.ts
-├── hooks/               # Shared, app-wide custom hooks
-├── pages/               # Top-level routed views
-├── store/               # Global state (Zustand/Redux/Context)
+├── pages/               # Page-level views composed from features
+├── shared/              # Shared/reusable code across features
+│   ├── components/      # Reusable, generic UI components
+│   ├── hooks/            # Shared, app-wide custom hooks
+│   ├── store/            # Global state (Zustand/Redux/Context)
+│   ├── types/            # Shared/global TypeScript types
+│   └── utils/             # Pure utility/helper functions
 ├── styles/              # Global styles, variables, resets, themes
 │   ├── variables.css
 │   ├── reset.css
 │   └── global.css
-├── types/               # Shared/global TypeScript types
-├── utils/               # Pure utility/helper functions
 ├── App.tsx
 └── main.tsx
 
@@ -42,7 +46,9 @@ src-tauri/
 ### Rules
 
 - **Co-locate** component files: a component's `.tsx`, styles, types, and tests live in the same folder.
-- **`features/`** holds anything specific to a domain (e.g., timetable generation, course management). **`components/`** holds only generic, reusable, domain-agnostic UI (Button, Modal, Input).
+- **`features/`** holds anything specific to a domain (e.g., timetable generation, course management). **`shared/components/`** holds only generic, reusable, domain-agnostic UI (Button, Modal, Input).
+- **`app/`** holds app-level wiring — providers (context/theming/query clients) and route definitions — not feature logic.
+- **`api/`** holds API clients and Tauri command bindings shared across features.
 - No file should exceed **~300 lines**. Split large components into subcomponents or extract logic into hooks/utils.
 - One component per file. The file name must match the component name exactly.
 
@@ -133,7 +139,7 @@ Avoid abbreviations unless universally understood (`id`, `url`, `config` are fin
 
 - Group and order imports:
   1. External libraries (`react`, `@tauri-apps/api`, etc.)
-  2. Internal absolute imports (`@/components`, `@/utils`)
+  2. Internal absolute imports (`@/shared`, `@/features`, `@/api`, `@/app`)
   3. Relative imports (`./`, `../`)
   4. Styles (always last)
 - Use absolute imports via path aliases (`@/`) for anything outside the current feature folder. Use relative imports only within the same folder/feature.
