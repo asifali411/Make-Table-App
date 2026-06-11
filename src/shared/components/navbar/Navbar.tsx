@@ -57,7 +57,9 @@ const Navbar = () => {
 
   return (
     <div className={styles.app}>
-      <section className={styles.sidebarWrapper}>
+      <section
+        className={`${styles.sidebarWrapper} ${collapsed ? styles.collapsed : ""}`}
+      >
         <div className={styles.sidebar}>
           <div className={styles.content}>
             <div className={styles.brand}>
@@ -66,7 +68,6 @@ const Navbar = () => {
               </div>
               <span className={styles.brandName}>MakeTable</span>
             </div>
-
             <div className={styles.group}>
               <div className={styles.groupLabel}>Menu</div>
               <ul className={styles.menu}>
@@ -78,24 +79,27 @@ const Navbar = () => {
                       }`}
                       onClick={() => handleNavigation(href)}
                       aria-current={active ? "page" : undefined}
+                      title={collapsed ? label : undefined}
                     >
                       <Icon className={styles.menuIcon} />
-                      <span>{label}</span>
+                      <span className={styles.menuLabel}>{label}</span>
                     </button>
                   </li>
                 ))}
               </ul>
             </div>
-
             <div className={styles.divider} />
-
-            <div className={styles.group} style={{ marginTop: "auto "}}>
+            <div className={styles.group} style={{ marginTop: "auto" }}>
               <ul className={styles.menu}>
                 {footerItems.map(({ href, label, icon: Icon }) => (
                   <li key={href}>
-                    <button className={`${styles.menuButton} ${acitveLink === href ? styles.menuButtonActive : ""}`} onClick={() => handleNavigation(href)}>
+                    <button
+                      className={`${styles.menuButton} ${acitveLink === href ? styles.menuButtonActive : ""}`}
+                      onClick={() => handleNavigation(href)}
+                      title={collapsed ? label : undefined}
+                    >
                       <Icon className={styles.menuIcon} />
-                      <span>{label}</span>
+                      {!collapsed && <span>{label}</span>}
                     </button>
                   </li>
                 ))}
@@ -106,10 +110,10 @@ const Navbar = () => {
       </section>
 
       <section className={styles.right}>
-        <Topbar onToggleSidebar={() => setCollapsed((prev) => !prev)}/>
-          <main>
-            <Outlet />
-          </main>
+        <Topbar onToggleSidebar={() => setCollapsed((prev) => !prev)} />
+        <main>
+          <Outlet />
+        </main>
       </section>
     </div>
   );

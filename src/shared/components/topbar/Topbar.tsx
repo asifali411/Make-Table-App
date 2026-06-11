@@ -98,7 +98,5 @@ function convertToBreadcrumbs(pathname: string): Breadcrumb[] {
     });
   });
 
-  console.log(breadcrumbs);
-
   return breadcrumbs;
 }
