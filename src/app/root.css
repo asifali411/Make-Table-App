@@ -1,0 +1,143 @@
+@font-face {
+  font-family: "Inter";
+  src: url("./assets/fonts/Inter.ttf");
+}
+
+@font-face {
+  font-family: "LilitaOne";
+  src: url("./assets/fonts/LilitaOne.ttf");
+}
+
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 35px;
+
+  --radius-badge:   2px;
+  --radius-small:   4px;
+  --radius-button:  6px;
+  --radius-card:    8px;
+  --radius-panel:  12px;
+  --radius-large:  22px;
+  --radius-round: 999px;
+
+  --font-size-xxs:    8px;
+  --font-size-xs:    11px;
+  --font-size-sm:    12px;
+  --font-size-md:    13px;
+  --font-size-lg:    14px;
+  --font-size-xl:    20px;
+  --font-size-xxl:   22px;
+}
+
+:root, [data-theme="light"] {
+  --color-primary:         #5e6ad2;
+  --color-accent:          #7170ff;
+  --color-accent-hover:    #828fff;
+  --color-lavendar:        #7a7fad;
+
+  --color-success:         #27a644;
+  --color-success-badge:   #10b981;
+  --color-warning:         #d97706;
+  --color-warning-badge:   #f59e0b;
+  --color-error:           #dc2626;
+  --color-error-badge:     #ef4444;
+  --color-badge:           #10b981;
+
+  --color-border-primary:  #23252a;
+  --color-border-secondary:#34343a;
+  --color-border-tertiary: #3e3e44;
+  --color-border-light:    #e6e6e6;
+  --color-border-neutral:  #d0d6e0;
+
+  --color-bg:              #eef0f2;
+  --color-surface:         #f4f5f7;
+  --color-card:            #ffffff;
+
+  --color-text-primary:    #0f1011;
+  --color-text-secondary:  #3b3f46;
+  --color-text-tertiary:   #62666d;
+  --color-text-quaternary: #8a8f98;
+
+  --color-overlay: rgba(0, 0, 0, 0.13);
+}
+
+[data-theme="dark"] {
+  --color-primary:         #5e6ad2;
+  --color-accent:          #7170ff;
+  --color-accent-hover:    #828fff;
+  --color-lavendar:        #8b90be;
+
+  --color-success:         #34d058;
+  --color-success-badge:   #059669;
+  --color-warning:         #fbbf24;
+  --color-warning-badge:   #d97706;
+  --color-error:           #f87171;
+  --color-error-badge:     #dc2626;
+  --color-badge:           #059669;
+
+  --color-border-primary:  #e2e4e9;
+  --color-border-secondary:#3a3b42;
+  --color-border-tertiary: #2e2f36;
+  --color-border-light:    #2a2b30;
+  --color-border-neutral:  #3a3d47;
+
+  --color-bg:              #0b0c0e;
+  --color-surface:         #131417;
+  --color-card:            #1e1f26;
+
+  --color-text-primary:    #e8eaed;
+  --color-text-secondary:  #9ea3ac;
+  --color-text-tertiary:   #6b7280;
+  --color-text-quaternary: #4b5160;
+
+  --color-overlay: rgba(255, 255, 255, 0.13);
+}
+
+[data-ui-density="comfortable"] {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 35px;
+}
+
+[data-ui-density="compact"] {
+  --space-1: 2px;
+  --space-2: 6px;
+  --space-3: 10px;
+  --space-4: 14px;
+  --space-5: 18px;
+  --space-6: 22px;
+  --space-7: 30px;
+  --space-8: 33px;
+}
+
+[data-ui-density="spacious"] {
+  --space-1: 6px;
+  --space-2: 10px;
+  --space-3: 14px;
+  --space-4: 18px;
+  --space-5: 22px;
+  --space-6: 26px;
+  --space-7: 34px;
+  --space-8: 37px;
+}
