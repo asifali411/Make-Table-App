@@ -23,6 +23,10 @@
   --font-size-lg:    14px;
   --font-size-xl:    20px;
   --font-size-xxl:   22px;
+
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 320ms ease;
 }
 
 [data-ui-density="comfortable"] {
