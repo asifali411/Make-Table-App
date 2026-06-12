@@ -1,0 +1,1 @@
+export type DialogVariant = "default" | "danger" | "warning" | "success";

@@ -3,7 +3,7 @@ import {
   ChevronRight, 
   User2, 
   Settings, 
-  LogOut 
+  LogOut,
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
@@ -12,38 +12,58 @@ import Dropdown from "../dropdown/Dropdown";
 import { Breadcrumb } from "./types/topbar.types";
 import { Option } from "../dropdown/types/dropdown.types";
 import styles from "./styles/Topbar.module.css";
+import Dialog from "../dialog/Dialog";
+
+// ---------------------------------------------------------------------------------------
+
+const DROPDOWN_OPTIONS: Option[] = [
+  {
+    label: "Profile",
+    icon: User2,
+  },
+  {
+    label: "Settings",
+    icon: Settings,
+  },
+  {
+    label: "Log out",
+    icon: LogOut,
+    isCritical: true,
+  },
+];
+
+// ---------------------------------------------------------------------------------------
 
 interface TopbarProps {
   onToggleSidebar?: () => void;
 }
 
+// ---------------------------------------------------------------------------------------
+
 const Topbar = ({ onToggleSidebar }: TopbarProps) => {
   // TODO: Replace with actual user initials.
   const userInitial = "ME";
-
   const location = useLocation();
-
   const breadcrumbs = useMemo(
     () => convertToBreadcrumbs(location.pathname),
     [location.pathname],
   );
-  const [openProfileDropdown, setOpenProfileDropdown] = useState(false);
 
-  const dropdownOptions: Option[] = [
-    {
-      label: "Profile",
-      icon: User2,
-    },
-    {
-      label: "Settings",
-      icon: Settings,
-    },
-    {
-      label: "Log out",
-      icon: LogOut,
-      isCritical: true,
-    },
-  ];
+  const [openProfileDropdown, setOpenProfileDropdown] = useState(false);
+  const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
+
+  // ---------------------------------------------------------------------------------------
+
+  const handleDropdownSelect = (option: string) => {
+    setOpenProfileDropdown(false);
+    switch (option) {
+      case "Log out":
+        setOpenLogoutDialog(true);
+        break;
+    }
+  };
+
+  // ---------------------------------------------------------------------------------------
 
   return (
     <header className={styles.topbar}>
@@ -94,15 +114,29 @@ const Topbar = ({ onToggleSidebar }: TopbarProps) => {
 
       <Dropdown
         open={openProfileDropdown}
-        options={dropdownOptions}
-        onSelect={(option) => console.log(option)}
+        options={DROPDOWN_OPTIONS}
+        onSelect={(option) => handleDropdownSelect(option)}
         onClose={() => setOpenProfileDropdown(false)}
+      />
+
+      <Dialog
+        open={openLogoutDialog}
+        title="Log Out?"
+        description="Are you sure you want to log out of your account?"
+        confirmLabel="Log Out"
+        cancelLabel="Cancel"
+        onCancel={() => setOpenLogoutDialog(false)}
+        onConfirm={() => {}}
+        variant="danger"
+        customIcon={<LogOut size={16} />}
       />
     </header>
   );
 };
 
 export default Topbar;
+
+// ---------------------------------------------------------------------------------------
 
 function capitalize(str: string): string {
   if (!str) return "";
