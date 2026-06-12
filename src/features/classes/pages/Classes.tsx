@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ViewMode } from "../../../shared/types/global.types";
-import PageHeader from "../../../shared/components/pageHeader/PageHeader";
+import PageHeader from "../../../shared/components/page-header/PageHeader";
 
 const TIMETABLE_NAME = "Timetable-2026"
 
