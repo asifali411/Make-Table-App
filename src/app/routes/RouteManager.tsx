@@ -2,14 +2,14 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../../shared/components/navbar/Navbar";
 
-const Classes = lazy(() => import("../../features/classes/pages/Classes"));
+const Classes  = lazy(() => import("../../features/classes/pages/Classes"));
+const Subjects = lazy(() => import("../../features/subjects/pages/Subjects"));
+const Teachers = lazy(() => import("../../features/teachers/pages/Teachers"));
+const Assignments = lazy(() => import("../../features/assignments/pages/Assignments"));
 
 // Placeholders
 const Loading        = () => <div>LOADING</div>;
 const Dashboard      = () => <div>DASHBOARD</div>;
-const Subjects       = () => <div>SUBJECTS</div>;
-const Teachers       = () => <div>TEACHERS</div>;
-const Assignments    = () => <div>ASSIGNMENTS</div>;
 const Settings       = () => <div>SETTINGS</div>;
 const HelpAndSupport = () => <div>HELP AND SUPPORT</div>
 

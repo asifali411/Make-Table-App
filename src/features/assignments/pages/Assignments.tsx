@@ -4,17 +4,17 @@ import PageHeader from "../../../shared/components/page-header/PageHeader";
 
 const TIMETABLE_NAME = "Timetable-2026"
 
-const Classes = () => {
+const Assignments = () => {
 
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
   return (
     <>
       <PageHeader 
-        title="Classes"
-        subtitle={`Define class entries for ${TIMETABLE_NAME}`}
+        title="Assignments"
+        subtitle={`Define subject entries for ${TIMETABLE_NAME}`}
         viewMode={viewMode}
-        addLabel="Add Class"
+        addLabel="Add Assignment"
         importLabel="Import"
         onViewModeChange={(mode) => setViewMode(mode)}
         onAdd={() => {}}
@@ -24,4 +24,4 @@ const Classes = () => {
   );
 };
 
-export default Classes;
+export default Assignments;
