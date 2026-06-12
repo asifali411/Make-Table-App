@@ -1,7 +1,8 @@
 import { PanelLeft, ChevronRight } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
+import Dropdown from "../dropdown/Dropdown";
 import { Breadcrumb } from "./types/topbar.types";
 import styles from "./styles/Topbar.module.css";
 
@@ -19,6 +20,7 @@ const Topbar = ({ onToggleSidebar }: TopbarProps) => {
     () => convertToBreadcrumbs(location.pathname),
     [location.pathname],
   );
+  const [openProfileDropdown, setOpenProfileDropdown] = useState(false);
 
   return (
     <header className={styles.topbar}>
@@ -60,9 +62,16 @@ const Topbar = ({ onToggleSidebar }: TopbarProps) => {
 
       <div className={styles.spacer} />
 
-      <div className={styles.avatar}>
+      <button className={styles.avatar} onClick={() => setOpenProfileDropdown((prev) => !prev)}>
         <span className={styles.avatarLabel}>{userInitial}</span>
-      </div>
+      </button>
+
+      <Dropdown 
+        open={openProfileDropdown}
+        options={["Profile", "Settings"]}
+        onSelect={(option) => console.log(option)}
+        onClose={() => setOpenProfileDropdown(false)}
+      />
     </header>
   );
 };
