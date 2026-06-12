@@ -15,6 +15,8 @@
   left: 0;
   z-index: 10;
 
+  --sidebar-collapsed-width: calc(4 * var(--space-4));
+
   display: flex;
   height: 100svh;
   width: var(--sidebar-width, 16rem);
@@ -29,8 +31,8 @@
 }
 
 .sidebarWrapper.collapsed {
-  width: var(--sidebar-collapsed-width, 4.5rem);
-  min-width: var(--sidebar-collapsed-width, 4.5rem);
+  width: var(--sidebar-collapsed-width);
+  min-width: var(--sidebar-collapsed-width);
 }
 
 .sidebar {
@@ -95,7 +97,7 @@
   align-items: center;
 
   flex-shrink: 0;
-  padding: calc(var(--space-1) * 1.5);
+  padding: 6px;
 
   border-radius: var(--radius-small);
   background: var(--color-gradient-primary);
@@ -103,8 +105,8 @@
 }
 
 .logo svg {
-  width: 16px;
-  height: 16px;
+  width: var(--space-4);
+  height: var(--space-4);
 }
 
 .brandName {
@@ -200,8 +202,8 @@
 }
 
 .menuIcon {
-  width: 16px;
-  height: 16px;
+  width: var(--space-4);
+  height: var(--space-4);
   flex-shrink: 0;
 
   margin-right: var(--space-2);
