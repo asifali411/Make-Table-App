@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { ViewMode } from "../../../shared/types/global.types";
 import PageHeader from "../../../shared/components/page-header/PageHeader";
+import useToast from "../../../shared/components/toast/hooks/useToast";
 
 const TIMETABLE_NAME = "Timetable-2026"
 
 const Classes = () => {
 
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
+  const { addToast } = useToast();
 
   return (
     <>
