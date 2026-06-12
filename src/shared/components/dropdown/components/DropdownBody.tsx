@@ -1,10 +1,11 @@
 import { createPortal } from "react-dom";
 import styles from "../styles/DropdownBody.module.css";
 import { RefObject } from "react";
+import type { Option } from "../types/dropdown.types";
 
 interface DropdownBodyProps {
   open: boolean;
-  options: string[];
+  options: Option[];
   style?: React.CSSProperties;
   onSelect: (option: string) => void;
   ref: RefObject<HTMLDivElement | null>;
@@ -29,13 +30,15 @@ const DropdownBody = ({
     >
       <ol>
         {options.map((opt) => (
-          <li key={opt}>
+          <li key={opt.label}>
             <button
               type="button"
               onMouseDown={(e) => e.preventDefault()}
-              onClick={() => onSelect(opt)}
+              onClick={() => onSelect(opt.label)}
+              className={`${opt.isCritical ? styles.critical : ""}`}
             >
-              {opt}
+              <opt.icon />
+              {opt.label}
             </button>
           </li>
         ))}

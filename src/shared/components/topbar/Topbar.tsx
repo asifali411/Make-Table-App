@@ -1,9 +1,16 @@
-import { PanelLeft, ChevronRight } from "lucide-react";
+import { 
+  PanelLeft, 
+  ChevronRight, 
+  User2, 
+  Settings, 
+  LogOut 
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useMemo, useState } from "react";
 
 import Dropdown from "../dropdown/Dropdown";
 import { Breadcrumb } from "./types/topbar.types";
+import { Option } from "../dropdown/types/dropdown.types";
 import styles from "./styles/Topbar.module.css";
 
 interface TopbarProps {
@@ -21,6 +28,22 @@ const Topbar = ({ onToggleSidebar }: TopbarProps) => {
     [location.pathname],
   );
   const [openProfileDropdown, setOpenProfileDropdown] = useState(false);
+
+  const dropdownOptions: Option[] = [
+    {
+      label: "Profile",
+      icon: User2,
+    },
+    {
+      label: "Settings",
+      icon: Settings,
+    },
+    {
+      label: "Log out",
+      icon: LogOut,
+      isCritical: true,
+    },
+  ];
 
   return (
     <header className={styles.topbar}>
@@ -62,13 +85,16 @@ const Topbar = ({ onToggleSidebar }: TopbarProps) => {
 
       <div className={styles.spacer} />
 
-      <button className={styles.avatar} onClick={() => setOpenProfileDropdown((prev) => !prev)}>
+      <button
+        className={styles.avatar}
+        onClick={() => setOpenProfileDropdown((prev) => !prev)}
+      >
         <span className={styles.avatarLabel}>{userInitial}</span>
       </button>
 
-      <Dropdown 
+      <Dropdown
         open={openProfileDropdown}
-        options={["Profile", "Settings"]}
+        options={dropdownOptions}
         onSelect={(option) => console.log(option)}
         onClose={() => setOpenProfileDropdown(false)}
       />
@@ -85,7 +111,7 @@ function capitalize(str: string): string {
 
 function formatLabel(segment: string): string {
   const specialLabels: Record<string, string> = {
-    "help": "Help And Support",
+    help: "Help And Support",
   };
 
   if (specialLabels[segment]) {

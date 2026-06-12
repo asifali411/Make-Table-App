@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import DropdownBody from "./components/DropdownBody";
 import styles from "./styles/Dropdown.module.css";
+import type { Option } from "./types/dropdown.types";
 
 interface DropdownProps {
   open: boolean;
   onClose: () => void;
-  options: string[];
+  options: Option[];
   style?: React.CSSProperties;
   onSelect: (option: string) => void;
 }
@@ -38,13 +39,13 @@ const Dropdown = ({
       zIndex: 9999,
       ...(openUpward
         ? { bottom: window.innerHeight - rect.top, top: "auto" }
-        : { top: rect.bottom + 14, bottom: "auto" }),
+        : { top: `calc(${rect.bottom}px + var(--space-5))`, bottom: "auto" }),
     });
   }, []);
 
   useEffect(() => {
-    if (!open) return;
     updatePosition();
+    if (!open) return;
     window.addEventListener("scroll", updatePosition, true);
     window.addEventListener("resize", updatePosition);
     return () => {
