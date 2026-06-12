@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ViewMode } from "../shared/types/global.types";
-import PageHeader from "../shared/components/pageHeader/PageHeader";
-import styles from "@/features/classes/styles/Classes.module.css";
+import { ViewMode } from "../../../shared/types/global.types";
+import PageHeader from "../../../shared/components/pageHeader/PageHeader";
+
+const TIMETABLE_NAME = "Timetable-2026"
 
 const Classes = () => {
 
@@ -11,7 +12,7 @@ const Classes = () => {
     <>
       <PageHeader 
         title="Classes"
-        subtitle="Define class entries for ---"
+        subtitle={`Define class entries for ${TIMETABLE_NAME}`}
         viewMode={viewMode}
         addLabel="Add Class"
         importLabel="Import"

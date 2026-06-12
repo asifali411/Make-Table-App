@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "../../shared/components/navbar/Navbar";
 
-const Classes = lazy(() => import("../../pages/Classes"));
+const Classes = lazy(() => import("../../features/classes/pages/Classes"));
 
 // Placeholders
 const Loading        = () => <div>LOADING</div>;
