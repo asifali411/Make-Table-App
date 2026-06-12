@@ -16,13 +16,13 @@
   --radius-large:  22px;
   --radius-round: 999px;
 
-  --font-size-xxs:    8px;
-  --font-size-xs:    11px;
-  --font-size-sm:    12px;
-  --font-size-md:    13px;
-  --font-size-lg:    14px;
-  --font-size-xl:    20px;
-  --font-size-xxl:   22px;
+  --font-size-xxs:   10px;
+  --font-size-xs:    13px;
+  --font-size-sm:    14px;
+  --font-size-md:    15px;
+  --font-size-lg:    16px;
+  --font-size-xl:    22px;
+  --font-size-xxl:   24px;
 
   --transition-fast: 120ms ease;
   --transition-base: 200ms ease;
