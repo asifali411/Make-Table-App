@@ -55,7 +55,6 @@ const Topbar = ({ onToggleSidebar }: TopbarProps) => {
   // ---------------------------------------------------------------------------------------
 
   const handleDropdownSelect = (option: string) => {
-    setOpenProfileDropdown(false);
     switch (option) {
       case "Log out":
         setOpenLogoutDialog(true);

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import DropdownBody from "./components/DropdownBody";
-import styles from "./styles/Dropdown.module.css";
 import type { Option } from "./types/dropdown.types";
 
 interface DropdownProps {
@@ -64,18 +63,22 @@ const Dropdown = ({
         !wrapperRef.current.contains(target) &&
         !dropdownRef.current?.contains(target)
       ) {
+        document.getElementById("root")?.removeAttribute("inert");
         onClose();
       }
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        document.getElementById("root")?.removeAttribute("inert");
         onClose();
       }
     };
 
+    document.getElementById("root")?.setAttribute("inert", "true");
     document.addEventListener("mouseup", handleClickOutside);
     document.addEventListener("keydown", handleKeyDown);
+
     return () => {
       document.removeEventListener("mouseup", handleClickOutside);
       document.removeEventListener("keydown", handleKeyDown);
@@ -83,7 +86,7 @@ const Dropdown = ({
   }, [open, onClose]);
 
   return (
-    <div className={styles.wrapper} ref={wrapperRef}>
+    <div ref={wrapperRef} inert={!open}>
       <DropdownBody
         open={open}
         ref={dropdownRef}
@@ -92,7 +95,11 @@ const Dropdown = ({
           ...style,
           ...dropdownStyle,
         }}
-        onSelect={onSelect}
+        onSelect={(option: string) => {
+          document.getElementById("root")?.removeAttribute("inert");
+          onClose();
+          onSelect(option);
+        }}
       />
     </div>
   );
