@@ -1,7 +1,7 @@
-import { DialogVariant } from "./types/Dialog.types";
-import styles from "./styles/Dialog.module.css";
 import { ReactNode, useEffect, useRef } from "react";
 import { Trash, TriangleAlert, CheckCircleIcon } from "lucide-react";
+import { DialogVariant } from "./types/Dialog.types";
+import styles from "./styles/Dialog.module.css";
 
 // ---------------------------------------------------------------------------------------
 
