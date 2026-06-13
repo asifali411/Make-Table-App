@@ -18,6 +18,7 @@ const DropdownBody = ({
   onSelect,
   ref,
 }: DropdownBodyProps) => {
+
   return createPortal(
     <div
       className={styles.dropdown}
@@ -26,6 +27,7 @@ const DropdownBody = ({
         ...style,
         opacity: open ? 1 : 0,
         pointerEvents: open ? "auto" : "none",
+        display: open ? "block" : "none",
       }}
     >
       <ol>

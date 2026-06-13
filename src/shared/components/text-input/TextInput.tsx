@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import styles from "./styles/TextInput.module.css";
 
 interface TextInputProps {
+  ref?: any,
   label: string,
   placeholder: string,
   hasError: boolean,
@@ -10,6 +11,7 @@ interface TextInputProps {
 }
 
 const TextInput = ({
+  ref,
   label,
   placeholder,
   hasError,
@@ -27,8 +29,9 @@ const TextInput = ({
   return (
     <div className={styles.wrapper}>
       <label className={styles.label}>{label}</label>
-      <input 
+      <input
         className={`${styles.input} ${hasError ? styles.error : ""}`}
+        ref={ref}
         type="text"
         placeholder={placeholder}
         value={input}

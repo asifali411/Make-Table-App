@@ -1,6 +1,7 @@
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect } from "react";
 import { X } from "lucide-react";
 import styles from "./styles/CreateDialog.module.css";
+import { createPortal } from "react-dom";
 
 // ---------------------------------------------------------------------------------------
 
@@ -25,19 +26,15 @@ const CreateDialog = ({
   onCreate,
   onClose,
 }: CreateDialogProps) => {
-  const closeRef = useRef<HTMLButtonElement>(null);
-
-  // ---------------------------------------------------------------------------------------
 
   useEffect(() => {
-    if (open) {
-      closeRef.current?.focus();
-    }
-  }, [open]);
+    if (open) document.getElementById("root")?.setAttribute("inert", "true");
 
-  useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && open) onClose();
+      if (e.key === "Escape" && open) {
+        document.getElementById("root")?.removeAttribute("inert");
+        onClose();
+      };
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
@@ -47,14 +44,17 @@ const CreateDialog = ({
 
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div
       className={styles.overlay}
       role="dialog"
       aria-modal="true"
       aria-labelledby="dialog-title"
       onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+        if (e.target === e.currentTarget) {
+          document.getElementById("root")?.removeAttribute("inert");
+          onClose()
+        };
       }}
     >
       <div className={styles.panel}>
@@ -63,7 +63,10 @@ const CreateDialog = ({
             {title}
           </h2>
 
-          <button onClick={onClose} ref={closeRef}>
+          <button onClick={() => {
+            document.getElementById("root")?.removeAttribute("inert");
+            onClose();
+          }}>
             <X />
           </button>
         </div>
@@ -76,7 +79,8 @@ const CreateDialog = ({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

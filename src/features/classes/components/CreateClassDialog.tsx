@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CreateDialog from "../../../shared/components/create-dialog/CreateDialog";
 import TextInput from "../../../shared/components/text-input/TextInput";
 
 interface CreateClassDialogProps {
   open: boolean;
-  
   onClose: () => void;
 }
 
@@ -12,6 +11,8 @@ const CreateClassDialog = ({
   open,
   onClose,
 }: CreateClassDialogProps) => {
+  const classNameRef = useRef<HTMLInputElement>(null);
+  
   const [createForm, setCreateForm] = useState({
     className: "",
     roomName: "",
@@ -20,6 +21,10 @@ const CreateClassDialog = ({
     className: false,
     roomName: false,
   }); 
+
+  useEffect(() => {
+    if(open) classNameRef.current?.focus();
+  }, [open]);
 
   const handleCreateClass = () => {
     setCreateFormError({
@@ -38,6 +43,7 @@ const CreateClassDialog = ({
       onCreate={handleCreateClass}
     >
       <TextInput
+        ref={classNameRef}
         label="Class Name"
         placeholder="eg: CSE A"
         hasError={createFormError.className}
