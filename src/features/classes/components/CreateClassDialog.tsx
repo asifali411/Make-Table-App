@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import CreateDialog from "../../../shared/components/create-dialog/CreateDialog";
 import TextInput from "../../../shared/components/text-input/TextInput";
+import Checkbox from "../../../shared/components/checkbox/Checkbox";
 
 interface CreateClassDialogProps {
   open: boolean;
@@ -16,6 +17,7 @@ const CreateClassDialog = ({
   const [createForm, setCreateForm] = useState({
     className: "",
     roomName: "",
+    isLab: false,
   });
   const [createFormError, setCreateFormError] = useState({
     className: false,
@@ -76,6 +78,13 @@ const CreateClassDialog = ({
           }));
         }}
       />
+
+      <Checkbox label="is Lab" onChange={(isLab) => {
+        setCreateForm((prev) => ({
+          ...prev,
+          isLab,
+        }));
+      }} />
     </CreateDialog>
   );
 };

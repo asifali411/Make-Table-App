@@ -1,0 +1,52 @@
+.container {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  padding-inline: var(--space-1);
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wrapper {
+  position: relative;
+  width: calc(var(--space-3) * 1.8);
+  height: calc(var(--space-3) * 1.5);
+  border-radius: var(--radius-small);
+  border: 2px solid var(--color-border-primary);
+  overflow: hidden;
+  margin-left: 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: transparent;
+  flex-shrink: 0;
+}
+
+.selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.wrapper svg {
+  width: 90%;
+  height: 90%;
+  stroke-width: 3px;
+  color: #fff;
+}
+
+.container > span:last-child {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  text-wrap: nowrap;
+  max-width: 100%;
+  text-overflow: ellipsis;
+}
