@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ViewMode } from "../../../shared/types/global.types";
 import PageHeader from "../../../shared/components/page-header/PageHeader";
 import CreateClassDialog from "../components/CreateClassDialog";
+import UpdateClassDialog from "../components/UpdateClassDialog";
 
 const TIMETABLE_NAME = "Timetable-2026"
 
@@ -26,6 +27,16 @@ const Classes = () => {
       <CreateClassDialog 
         open={openCreateClassDialog}
         onClose={() => setOpenCreateClassDialog(false)}
+      />
+
+      <UpdateClassDialog
+        open={false}
+        data={{
+          className: "CSE 1A",
+          roomName: "Annex 101",
+          isLab: false,
+        }}
+        onClose={() => {}}
       />
     </>
   );

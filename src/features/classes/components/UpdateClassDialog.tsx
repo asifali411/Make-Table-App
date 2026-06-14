@@ -1,53 +1,58 @@
 import { useEffect, useRef, useState } from "react";
-import CreateDialog from "../../../shared/components/create-dialog/CreateDialog";
+import UpdateDialog from "../../../shared/components/update-dialog/UpdateDialog";
 import TextInput from "../../../shared/components/text-input/TextInput";
 import Checkbox from "../../../shared/components/checkbox/Checkbox";
 
-interface CreateClassDialogProps {
+interface ClassForm {
+  className: string;
+  roomName: string;
+  isLab: boolean;
+}
+
+interface UpdateClassDialog {
   open: boolean;
+  data: ClassForm;
   onClose: () => void;
 }
 
-const CreateClassDialog = ({
-  open,
-  onClose,
-}: CreateClassDialogProps) => {
+const UpdateClassDialog = ({ open, data, onClose }: UpdateClassDialog) => {
   const classNameRef = useRef<HTMLInputElement>(null);
-  
+
   const [form, setForm] = useState({
-    className: "",
-    roomName: "",
-    isLab: false,
+    className: data.className,
+    roomName: data.roomName,
+    isLab: data.isLab,
   });
   const [formError, setFormError] = useState({
     className: false,
     roomName: false,
-  }); 
+  });
 
   useEffect(() => {
-    if(open) classNameRef.current?.focus();
+    if (open) classNameRef.current?.focus();
   }, [open]);
 
-  const handleCreateClass = () => {
+  const handleUpdateClass = () => {
     setFormError({
       className: form.className.trim() === "",
       roomName: form.roomName.trim() === "",
     });
 
-    // TODO: handle class creation
+    // TODO: handle class updation
   };
 
   return (
-    <CreateDialog
+    <UpdateDialog
       open={open}
-      title="Add Class"
+      title="Update Class"
       onClose={onClose}
-      onCreate={handleCreateClass}
+      onUpdate={handleUpdateClass}
     >
       <TextInput
         ref={classNameRef}
         label="Class Name"
         placeholder="eg: CSE A"
+        defaultValue={form.className}
         hasError={formError.className}
         onChange={(value) => {
           setForm((prev) => ({
@@ -65,6 +70,7 @@ const CreateClassDialog = ({
       <TextInput
         label="Room Name"
         placeholder="eg: Room 101"
+        defaultValue={form.roomName}
         hasError={formError.roomName}
         onChange={(value) => {
           setForm((prev) => ({
@@ -79,14 +85,18 @@ const CreateClassDialog = ({
         }}
       />
 
-      <Checkbox label="is Lab" onChange={(isLab) => {
-        setForm((prev) => ({
-          ...prev,
-          isLab,
-        }));
-      }} />
-    </CreateDialog>
+      <Checkbox
+        label="is Lab"
+        defaultValue={form.isLab}
+        onChange={(isLab) => {
+          setForm((prev) => ({
+            ...prev,
+            isLab,
+          }));
+        }}
+      />
+    </UpdateDialog>
   );
 };
 
-export default CreateClassDialog;
+export default UpdateClassDialog;
