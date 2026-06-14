@@ -4,12 +4,18 @@ import { useState } from "react";
 
 interface CheckboxProps {
   label?: string;
+  defaultValue?: boolean;
   onChange: (value: boolean) => void;
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
 }
 
-const Checkbox = ({ label = "", style = {}, onChange }: CheckboxProps) => {
-  const [isChecked, setIsChecked] = useState(false);
+const Checkbox = ({
+  label = "",
+  defaultValue = false,
+  style = {},
+  onChange,
+}: CheckboxProps) => {
+  const [isChecked, setIsChecked] = useState(defaultValue);
 
   const handleChange = () => {
     const newValue = !isChecked;
@@ -28,7 +34,10 @@ const Checkbox = ({ label = "", style = {}, onChange }: CheckboxProps) => {
         tabIndex={-1}
       />
 
-      <span className={`${styles.wrapper} ${isChecked ? styles.selected : ""}`} tabIndex={0}>
+      <span
+        className={`${styles.wrapper} ${isChecked ? styles.selected : ""}`}
+        tabIndex={0}
+      >
         {isChecked && <CheckIcon />}
       </span>
 

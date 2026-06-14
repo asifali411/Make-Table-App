@@ -2,10 +2,11 @@ import { ChangeEvent, useState } from "react";
 import styles from "./styles/TextInput.module.css";
 
 interface TextInputProps {
-  ref?: any,
-  label: string,
-  placeholder: string,
-  hasError: boolean,
+  ref?: any;
+  label: string;
+  placeholder: string;
+  hasError: boolean;
+  defaultValue?: string;
 
   onChange: (value: string) => void;
 }
@@ -15,11 +16,12 @@ const TextInput = ({
   label,
   placeholder,
   hasError,
+  defaultValue = "",
 
   onChange,
 }: TextInputProps) => {
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>(defaultValue);
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
