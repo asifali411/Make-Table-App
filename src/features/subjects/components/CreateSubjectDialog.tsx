@@ -4,6 +4,7 @@ import CreateDialog from "../../../shared/components/create-dialog/CreateDialog"
 import NumberInput from "../../../shared/components/number-input/NumberInput";
 import TextInput from "../../../shared/components/text-input/TextInput";
 import styles from "../styles/SubjectDialog.module.css";
+import BadgeSelect from "./BadgeSelect";
 
 interface SubjectForm {
   subjectName: string;
@@ -91,7 +92,12 @@ const CreateSubjectDialog = ({ open, onClose }: CreateSubjectDialogProps) => {
             }}
           />
 
-          <NumberInput label="Hardness" hasError={false} onChange={() => {}} />
+          <BadgeSelect
+            label="Hardness"
+            options={["Low", "Med", "High"]}
+            defaultValue="Low"
+            onSelect={() => {}}
+          />
         </div>
       </div>
 
