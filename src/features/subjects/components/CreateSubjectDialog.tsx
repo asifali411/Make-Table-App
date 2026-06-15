@@ -74,6 +74,7 @@ const CreateSubjectDialog = ({ open, onClose }: CreateSubjectDialogProps) => {
     // TODO: handle subject creation
 
     resetForm();
+    document.getElementById("root")?.removeAttribute("inert");
     onClose();
   };
 

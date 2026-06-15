@@ -16,32 +16,49 @@ interface CreateTeacherDialogProps {
   onClose: () => void;
 }
 
-const CreateTeacherDialog = ({
-  open,
-  onClose
-}: CreateTeacherDialogProps) => {
+const INITIAL_FORM: TeacherForm = {
+  name: "",
+  maxPerDay: 4,
+  maxPerWeek: 15,
+  maxConsecutive: 2,
+};
 
-  const [form, setForm] = useState<TeacherForm>({
-    name: "",
-    maxPerDay: 4,
-    maxPerWeek: 15,
-    maxConsecutive: 2,
-  });
+const INITIAL_FORM_ERROR = {
+  name: false,
+  maxPerDay: false,
+  maxPerWeek: false,
+  maxConsecutive: false,
+};
 
-  const [formError, setFormError] = useState({
-    name: false,
-    maxPerDay: false,
-    maxPerWeek: false,
-    maxConsecutive: false,
-  });
+const CreateTeacherDialog = ({ open, onClose }: CreateTeacherDialogProps) => {
+  const [form, setForm] = useState<TeacherForm>(INITIAL_FORM);
+  const [formError, setFormError] = useState(INITIAL_FORM_ERROR);
+
+  const resetForm = () => {
+    setForm(INITIAL_FORM);
+    setFormError(INITIAL_FORM_ERROR);
+  };
+
+  const validate = () => {
+    const errors: typeof INITIAL_FORM_ERROR = {
+      name: form.name.trim() === "",
+      maxPerDay: false,
+      maxPerWeek: false,
+      maxConsecutive: false,
+    };
+
+    setFormError(errors);
+    return !Object.values(errors).some(Boolean);
+  };
 
   const handleCreateTeacher = () => {
-    setFormError((prev) => ({
-      ...prev,
-      name: form.name.trim() === "",
-    }));
+    if (!validate()) return;
 
     // TODO: handle teacher creation
+
+    resetForm();
+    document.getElementById("root")?.removeAttribute("inert");
+    onClose();
   };
 
   const handleChange = (
@@ -69,6 +86,7 @@ const CreateTeacherDialog = ({
       <TextInput
         label="Name"
         placeholder="eg: Dr Smith"
+        defaultValue={form.name}
         hasError={formError.name}
         onChange={(value) => {
           handleChange("name", value);
@@ -78,20 +96,25 @@ const CreateTeacherDialog = ({
       <div className={styles.row}>
         <NumberInput
           label="Max/Day"
+          defaultValue={form.maxPerDay}
           hasError={formError.maxPerDay}
           onChange={(value: number) => {
             handleChange("maxPerDay", value);
           }}
         />
+
         <NumberInput
           label="Max/Week"
+          defaultValue={form.maxPerWeek}
           hasError={formError.maxPerWeek}
           onChange={(value: number) => {
             handleChange("maxPerWeek", value);
           }}
         />
+
         <NumberInput
           label="Max Consec."
+          defaultValue={form.maxConsecutive}
           hasError={formError.maxConsecutive}
           onChange={(value: number) => {
             handleChange("maxConsecutive", value);
