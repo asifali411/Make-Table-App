@@ -1,0 +1,86 @@
+.authCard {
+  width: 100%;
+  max-width: 28rem;
+  padding: var(--space-8);
+  border-radius: var(--radius-large);
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-float);
+  backdrop-filter: blur(28px);
+  font-family: inherit;
+  height: fit-content;
+}
+
+.authHeader {
+  margin-bottom: var(--space-5);
+}
+
+.authTitle {
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.05;
+  margin-bottom: var(--space-3);
+}
+
+.authSubtitle {
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-md);
+  font-size: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.submitBtn {
+  width: 100%;
+  margin-top: var(--space-2);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-panel);
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 700;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition:
+    background var(--transition-base),
+    transform var(--transition-base);
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.switchPrompt {
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-size: 0.94rem;
+}
+
+.switchPrompt a {
+  color: var(--color-text-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.switchPrompt a:hover {
+  color: var(--color-accent-hover);
+}

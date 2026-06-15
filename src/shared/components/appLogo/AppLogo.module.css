@@ -6,7 +6,7 @@
   flex-shrink: 0;
   padding: 6px;
 
-  border-radius: var(--radius-small);
+  border-radius: var(--radius-button);
   background: var(--color-gradient-primary);
   color: #fff;
 }

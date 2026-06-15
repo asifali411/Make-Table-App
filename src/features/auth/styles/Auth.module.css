@@ -1,4 +1,57 @@
 .authPage {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  background-color: var(--color-bg);
+  padding: 5rem 10vw;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: gap var(--transition-base);
+}
+.brandName {
+  opacity: 1;
+  max-width: 200px;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.content__left {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-inline: var(--space-6);
+}
+.panelFooter {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+.content__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+}
+
+@media (max-width: 1200px) {
+  .authPage {
+    padding: 4rem 6vw;
+  }
+}
+
+@media (max-width: 1000px) {
+  .authPage {
+    grid-template-columns: 1fr;
+    padding: 3rem 5vw;
+  }
+  .content__left {
+    display: none;
+  }
 }
