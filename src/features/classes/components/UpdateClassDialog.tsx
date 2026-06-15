@@ -9,36 +9,65 @@ interface ClassForm {
   isLab: boolean;
 }
 
-interface UpdateClassDialog {
+interface UpdateClassDialogProps {
   open: boolean;
   data: ClassForm;
   onClose: () => void;
 }
 
-const UpdateClassDialog = ({ open, data, onClose }: UpdateClassDialog) => {
+const INITIAL_FORM_ERROR = {
+  className: false,
+  roomName: false,
+};
+
+const UpdateClassDialog = ({ open, data, onClose }: UpdateClassDialogProps) => {
   const classNameRef = useRef<HTMLInputElement>(null);
 
-  const [form, setForm] = useState({
-    className: data.className,
-    roomName: data.roomName,
-    isLab: data.isLab,
-  });
-  const [formError, setFormError] = useState({
-    className: false,
-    roomName: false,
-  });
+  const [form, setForm] = useState<ClassForm>(data);
+  const [formError, setFormError] = useState(INITIAL_FORM_ERROR);
 
   useEffect(() => {
     if (open) classNameRef.current?.focus();
   }, [open]);
 
-  const handleUpdateClass = () => {
-    setFormError({
+  useEffect(() => {
+    if (open) {
+      setForm(data);
+      setFormError(INITIAL_FORM_ERROR);
+    }
+  }, [open, data]);
+
+  const validate = () => {
+    const errors: typeof INITIAL_FORM_ERROR = {
       className: form.className.trim() === "",
       roomName: form.roomName.trim() === "",
-    });
+    };
+
+    setFormError(errors);
+    return !Object.values(errors).some(Boolean);
+  };
+
+  const handleUpdateClass = () => {
+    if (!validate()) return;
 
     // TODO: handle class updation
+
+    onClose();
+    document.getElementById("root")?.removeAttribute("inert");
+  };
+
+  const handleChange = (field: keyof ClassForm, value: string | boolean) => {
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
+    if (field in formError) {
+      setFormError((prev) => ({
+        ...prev,
+        [field as keyof typeof formError]: false,
+      }));
+    }
   };
 
   return (
@@ -55,15 +84,7 @@ const UpdateClassDialog = ({ open, data, onClose }: UpdateClassDialog) => {
         defaultValue={form.className}
         hasError={formError.className}
         onChange={(value) => {
-          setForm((prev) => ({
-            ...prev,
-            className: value,
-          }));
-
-          setFormError((prev) => ({
-            ...prev,
-            className: false,
-          }));
+          handleChange("className", value);
         }}
       />
 
@@ -73,26 +94,15 @@ const UpdateClassDialog = ({ open, data, onClose }: UpdateClassDialog) => {
         defaultValue={form.roomName}
         hasError={formError.roomName}
         onChange={(value) => {
-          setForm((prev) => ({
-            ...prev,
-            roomName: value,
-          }));
-
-          setFormError((prev) => ({
-            ...prev,
-            roomName: false,
-          }));
+          handleChange("roomName", value);
         }}
       />
 
       <Checkbox
         label="is Lab"
         defaultValue={form.isLab}
-        onChange={(isLab) => {
-          setForm((prev) => ({
-            ...prev,
-            isLab,
-          }));
+        onChange={(value) => {
+          handleChange("isLab", value);
         }}
       />
     </UpdateDialog>
