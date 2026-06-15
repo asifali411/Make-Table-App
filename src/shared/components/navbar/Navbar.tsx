@@ -13,6 +13,7 @@ import { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import Topbar from "../topbar/Topbar";
 import styles from "./styles/Navbar.module.css";
+import AppLogo from "../appLogo/AppLogo";
 
 // --- Types ------------------------------------------------------------------------
 
@@ -25,12 +26,17 @@ interface MenuItem {
     Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
   >;
   active?: boolean;
-};
+}
 
 // ------------------------------------------------------------------------
 
 const menuItems: MenuItem[] = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard, active: true },
+  {
+    href: "/dashboard",
+    label: "Dashboard",
+    icon: LayoutDashboard,
+    active: true,
+  },
   { href: "/classes", label: "Classes", icon: BookOpen },
   { href: "/subjects", label: "Subjects", icon: GraduationCap },
   { href: "/teachers", label: "Teachers", icon: Users },
@@ -45,7 +51,6 @@ const footerItems: MenuItem[] = [
 // -------------------------------------------------------------------------
 
 const Navbar = () => {
-
   const navigate = useNavigate();
   const [acitveLink, setActiveLink] = useState<HrefType>("/dashboard");
   const [collapsed, setCollapsed] = useState(false);
@@ -63,9 +68,7 @@ const Navbar = () => {
         <div className={styles.sidebar}>
           <div className={styles.content}>
             <div className={styles.brand}>
-              <div className={styles.logo}>
-                <Calendar />
-              </div>
+              <AppLogo />
               <span className={styles.brandName}>MakeTable</span>
             </div>
             <div className={styles.group}>
@@ -117,6 +120,6 @@ const Navbar = () => {
       </section>
     </div>
   );
-}
+};
 
 export default Navbar;

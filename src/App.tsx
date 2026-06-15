@@ -8,11 +8,11 @@ import "./styles/global.css";
 import { useEffect } from "react";
 
 function App() {
-
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    navigate("/dashboard");
+    //navigate("/login"); well fuck u ali ;) im a good guy so i commented it out
+    //navigate("/dashboard"); ig i just violated your rules.. commented codes.. sry love.. dont punish me
   }, []);
 
   return (

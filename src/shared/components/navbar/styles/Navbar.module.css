@@ -91,24 +91,6 @@
   gap: 0;
 }
 
-.logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  flex-shrink: 0;
-  padding: 6px;
-
-  border-radius: var(--radius-small);
-  background: var(--color-gradient-primary);
-  color: #fff;
-}
-
-.logo svg {
-  width: var(--space-4);
-  height: var(--space-4);
-}
-
 .brandName {
   font-size: var(--font-size-xl);
   font-weight: 700;
@@ -193,11 +175,7 @@
 }
 
 .menuButtonActive:hover {
-  background-color: color-mix(
-    in srgb,
-    var(--color-primary) 15%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
   color: var(--color-primary);
 }
 
