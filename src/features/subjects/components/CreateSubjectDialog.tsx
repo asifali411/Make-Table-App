@@ -3,12 +3,14 @@ import Checkbox from "../../../shared/components/checkbox/Checkbox";
 import CreateDialog from "../../../shared/components/create-dialog/CreateDialog";
 import NumberInput from "../../../shared/components/number-input/NumberInput";
 import TextInput from "../../../shared/components/text-input/TextInput";
-import styles from "../styles/SubjectDialog.module.css";
 import BadgeSelect from "./BadgeSelect";
+import { Hardness } from "../../../shared/types/global.types";
+import styles from "../styles/SubjectDialog.module.css";
 
 interface SubjectForm {
   subjectName: string;
   isLab: boolean;
+  hardness: Hardness;
   minClassesDay: number;
   maxClassesDay: number;
   minClassesWeek: number;
@@ -21,31 +23,58 @@ interface CreateSubjectDialogProps {
   onClose: () => void;
 }
 
-const CreateSubjectDialog = ({ open, onClose }: CreateSubjectDialogProps) => {
-  const [form, setForm] = useState<SubjectForm>({
-    subjectName: "",
-    isLab: false,
-    minClassesDay: 0,
-    maxClassesDay: 2,
-    minClassesWeek: 1,
-    maxClassesWeek: 5,
-    maxConsecutive: 2,
-  });
+const INITIAL_FORM: SubjectForm = {
+  subjectName: "",
+  isLab: false,
+  hardness: "Low",
+  minClassesDay: 0,
+  maxClassesDay: 2,
+  minClassesWeek: 1,
+  maxClassesWeek: 5,
+  maxConsecutive: 2,
+};
 
-  const [formError, setFormError] = useState({
-    subjectName: false,
-    minClassesDay: false,
-    maxClassesDay: false,
-    minClassesWeek: false,
-    maxClassesWeek: false,
-    maxConsecutive: false,
-  });
+const INITIAL_FORM_ERROR = {
+  subjectName: false,
+  minClassesDay: false,
+  maxClassesDay: false,
+  minClassesWeek: false,
+  maxClassesWeek: false,
+  maxConsecutive: false,
+};
+
+type FormErrorKey = keyof typeof INITIAL_FORM_ERROR;
+
+const CreateSubjectDialog = ({ open, onClose }: CreateSubjectDialogProps) => {
+  const [form, setForm] = useState<SubjectForm>(INITIAL_FORM);
+  const [formError, setFormError] = useState(INITIAL_FORM_ERROR);
+
+  const resetForm = () => {
+    setForm(INITIAL_FORM);
+    setFormError(INITIAL_FORM_ERROR);
+  };
+
+  const validate = () => {
+    const errors: typeof INITIAL_FORM_ERROR = {
+      subjectName: form.subjectName.trim() === "",
+      minClassesDay: false,
+      maxClassesDay: form.maxClassesDay < form.minClassesDay,
+      minClassesWeek: false,
+      maxClassesWeek: form.maxClassesWeek < form.minClassesWeek,
+      maxConsecutive: false,
+    };
+
+    setFormError(errors);
+    return !Object.values(errors).some(Boolean);
+  };
 
   const handleCreateSubject = () => {
-    setFormError((prev) => ({
-      ...prev,
-      subjectName: form.subjectName.trim() === "",
-    }));
+    if (!validate()) return;
+
+    // TODO: handle subject creation
+
+    resetForm();
+    onClose();
   };
 
   const handleChange = (
@@ -57,10 +86,12 @@ const CreateSubjectDialog = ({ open, onClose }: CreateSubjectDialogProps) => {
       [field]: value,
     }));
 
-    setFormError((prev) => ({
-      ...prev,
-      [field]: false,
-    }));
+    if (field in formError) {
+      setFormError((prev) => ({
+        ...prev,
+        [field as FormErrorKey]: false,
+      }));
+    }
   };
 
   return (
@@ -95,8 +126,10 @@ const CreateSubjectDialog = ({ open, onClose }: CreateSubjectDialogProps) => {
           <BadgeSelect
             label="Hardness"
             options={["Low", "Med", "High"]}
-            defaultValue="Low"
-            onSelect={() => {}}
+            defaultValue={form.hardness}
+            onSelect={(value) => {
+              handleChange("hardness", value);
+            }}
           />
         </div>
       </div>
