@@ -33,30 +33,24 @@ const AuthInput = memo(
     ...props
   }: RequiredInputFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
-
     const [shake, setShake] = useState(false);
 
+    //shaking handler
     useEffect(() => {
       if (!error) return;
-
       setShake(false);
-
       const timer = setTimeout(() => setShake(true), 0);
-
       return () => clearTimeout(timer);
     }, [error]);
 
     const isPassword = type === "password";
-
     const inputType = isPassword && !showPassword ? "password" : "text";
-
     const Icon = icon !== undefined ? ICONS[icon] : null;
 
     return (
       <div className={styles.inputContainer}>
         <label htmlFor={id} className={styles.label}>
           <span>{label}</span>
-
           {error && <span className={styles.errorLabel}>{error}</span>}
         </label>
 
@@ -76,6 +70,7 @@ const AuthInput = memo(
             id={id}
             type={inputType}
             value={value}
+            autoComplete="off"
             onChange={(e) => onChange(e.target.value)}
           />
 

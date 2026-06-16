@@ -55,3 +55,36 @@
     display: none;
   }
 }
+
+@media (max-width: 400px) {
+  .authPage {
+    padding-inline: 0;
+  }
+}
+
+/* ---------------------------------- BLOBS --------------------------------- */
+.blob1,
+.blob2 {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(150px);
+  opacity: 0.85;
+}
+
+.blob1 {
+  top: -110px;
+  left: -100px;
+  width: 500px;
+  height: 500px;
+  filter: blur(190px);
+  background: var(--color-gradient-primary);
+}
+
+.blob2 {
+  bottom: -180px;
+  right: -160px;
+  width: 400px;
+  height: 460px;
+  background: var(--color-gradient-primary);
+}
