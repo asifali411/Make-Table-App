@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import Topbar from "../topbar/Topbar";
 import styles from "./styles/Navbar.module.css";
-import AppLogo from "../appLogo/AppLogo";
+import AppLogo from "../app-logo/AppLogo";
 
 // --- Types ------------------------------------------------------------------------
 

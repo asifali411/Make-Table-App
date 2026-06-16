@@ -1,5 +1,5 @@
 import styles from "../styles/Auth.module.css";
-import AppLogo from "../../../shared/components/appLogo/AppLogo";
+import AppLogo from "../../../shared/components/app-logo/AppLogo";
 import AuthHero from "../components/authHero/AuthHero";
 import AuthForm from "../components/authForm/AuthForm";
 import Blobs from "../components/blobs/Blobs";
