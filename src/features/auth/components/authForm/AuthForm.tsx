@@ -3,31 +3,42 @@ import styles from "./AuthForm.module.css";
 import AuthInput from "../authInput/AuthInput";
 import { Link } from "react-router-dom";
 import { COMPONENT_CONTENT } from "./content.constant";
-
+import useValidate from "../../hooks/useValidate";
+import type { AuthForm, AuthErrors } from "../../types/types";
 type AuthFormType = { authType: "register" | "login" };
-type FormField =
-  | keyof typeof COMPONENT_CONTENT.register.initialValues
-  | keyof typeof COMPONENT_CONTENT.login.initialValues;
 
 const AuthForm = ({ authType }: AuthFormType) => {
   const SELECTED_CONTENT = COMPONENT_CONTENT[authType];
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const [formData, setFormData] = useState(SELECTED_CONTENT.initialValues);
-  const [errorStates, setErrorStates] = useState(
+  const [formData, setFormData] = useState<AuthForm>(
+    SELECTED_CONTENT.initialValues,
+  );
+
+  const [errorStates, setErrorStates] = useState<AuthErrors>(
     SELECTED_CONTENT.initialErrors,
   );
-  const loginHandler = (): undefined => {};
+  const loginHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const { hasError, newErrorStates } = useValidate(formData);
+    setErrorStates(newErrorStates);
+    if (hasError) return;
+    setSubmitLoading(true);
+    try {
+      //api implimenation
+    } catch (error) {
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
 
   //helper
-  const updateField = (field: FormField, value: string) => {
-    setFormData(
-      (prev) =>
-        ({
-          ...prev,
-          [field]: value,
-        }) as typeof prev,
-    );
+  const updateField = (field: keyof AuthForm, value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   return (
@@ -50,14 +61,14 @@ const AuthForm = ({ authType }: AuthFormType) => {
             onChange={(value) => updateField("username", value)}
           />
 
-          {"email" in formData && "email" in errorStates && (
+          {"email" in formData && (
             <AuthInput
               id="email_field"
               label="Email"
               placeholder="Email"
               type="email"
               icon="mail"
-              value={formData.email}
+              value={formData.email ?? ""}
               error={errorStates.email}
               onChange={(value) => updateField("email", value)}
             />
@@ -74,19 +85,18 @@ const AuthForm = ({ authType }: AuthFormType) => {
             onChange={(value) => updateField("password", value)}
           />
 
-          {"confirmPassword" in formData &&
-            "confirmPassword" in errorStates && (
-              <AuthInput
-                id="confirmPassword_field"
-                label="Confirm password"
-                placeholder="Confirm password"
-                type="password"
-                icon="password"
-                error={errorStates.confirmPassword}
-                value={formData.confirmPassword}
-                onChange={(value) => updateField("confirmPassword", value)}
-              />
-            )}
+          {"confirmPassword" in formData && (
+            <AuthInput
+              id="confirmPassword__field"
+              label="Confirm password"
+              placeholder="Confirm password"
+              type="password"
+              icon="password"
+              error={errorStates.confirmPassword}
+              value={formData.confirmPassword ?? ""}
+              onChange={(value) => updateField("confirmPassword", value)}
+            />
+          )}
         </div>
 
         <button

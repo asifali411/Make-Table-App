@@ -1,3 +1,5 @@
+import type { AuthForm, AuthErrors } from "../../types/types";
+
 export const COMPONENT_CONTENT = {
   register: {
     title: "Create your account",
@@ -13,14 +15,15 @@ export const COMPONENT_CONTENT = {
       email: "",
       password: "",
       confirmPassword: "",
-    },
+    } satisfies AuthForm,
     initialErrors: {
       username: undefined,
       email: undefined,
       password: undefined,
       confirmPassword: undefined,
-    },
+    } satisfies AuthErrors,
   },
+
   login: {
     title: "Sign in",
     tagline: "Welcome back. Let's get you in",
@@ -33,10 +36,10 @@ export const COMPONENT_CONTENT = {
     initialValues: {
       username: "",
       password: "",
-    },
+    } satisfies AuthForm,
     initialErrors: {
       username: undefined,
       password: undefined,
-    },
+    } satisfies AuthErrors,
   },
 } as const;
