@@ -167,7 +167,7 @@ Avoid abbreviations unless universally understood (`id`, `url`, `config` are fin
 
   ```css
   .card { }
-  .card__header { }
+  .card_header { }
   ```
 
 ### Design Tokens

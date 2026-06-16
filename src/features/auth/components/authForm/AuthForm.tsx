@@ -40,7 +40,7 @@ const AuthForm = ({ authType }: AuthFormType) => {
       <form onSubmit={loginHandler} className={styles.form}>
         <div className={styles.formGroup}>
           <AuthInput
-            id="username__field"
+            id="username_field"
             label="Username"
             placeholder="Username"
             type="text"
@@ -52,7 +52,7 @@ const AuthForm = ({ authType }: AuthFormType) => {
 
           {"email" in formData && "email" in errorStates && (
             <AuthInput
-              id="email__field"
+              id="email_field"
               label="Email"
               placeholder="Email"
               type="email"
@@ -64,7 +64,7 @@ const AuthForm = ({ authType }: AuthFormType) => {
           )}
 
           <AuthInput
-            id="password__field"
+            id="password_field"
             label="Password"
             placeholder="Password"
             type="password"
@@ -77,7 +77,7 @@ const AuthForm = ({ authType }: AuthFormType) => {
           {"confirmPassword" in formData &&
             "confirmPassword" in errorStates && (
               <AuthInput
-                id="confirmPassword__field"
+                id="confirmPassword_field"
                 label="Confirm password"
                 placeholder="Confirm password"
                 type="password"

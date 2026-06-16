@@ -7,7 +7,7 @@ const Register = () => {
   return (
     <main className={styles.authPage}>
       <Blobs />
-      <aside className={styles.content__left}>
+      <aside className={styles.content_left}>
         <div className={styles.brand}>
           <AppLogo />
           <span className={styles.brandName}>MakeTable</span>
@@ -18,7 +18,7 @@ const Register = () => {
           © {new Date().getFullYear()} MakeTable · Open source
         </p>
       </aside>
-      <div className={styles.content__right}>
+      <div className={styles.content_right}>
         <AuthForm authType="register" />
       </div>
     </main>
