@@ -7,16 +7,17 @@ import { ChevronDown } from "lucide-react";
 interface SearchableDropdownProps {
   options: Option[];
   style?: React.CSSProperties;
+  label: string,
   emptyPlaceholder?: string;
   searchPlaceholder?: string;
 
-  onClose: () => void;
   onSelect: (option: string) => void;
 }
 
 const SearchableDropdown = ({
   options,
   style,
+  label = "",
   emptyPlaceholder = "Select an option",
   searchPlaceholder = "",
 
@@ -99,10 +100,13 @@ const SearchableDropdown = ({
         className={styles.container}
         onClick={() => setOpen((prev) => !prev)}
       >
-        <span>
-          {selected}
-        </span>
-        <ChevronDown />
+        <label>{label}</label>
+        <div className={styles.selecter}>
+          <span>
+            {selected}
+          </span>
+          <ChevronDown />
+        </div>
       </div>
 
       <DropdownBody
