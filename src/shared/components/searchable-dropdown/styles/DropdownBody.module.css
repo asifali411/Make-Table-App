@@ -1,0 +1,89 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: var(--space-1);
+  background-color: var(--color-card);
+  box-shadow: var(--shadow-float);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-card);
+  transition: opacity var(--transition-fast);
+}
+
+.dropdown ol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown li {
+  display: block;
+}
+
+.dropdown button,
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+  border: none;
+  border-radius: var(--radius-small);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.dropdown button.selected {
+  color: var(--color-primary);
+  background-color: var(--color-primary-highlight);
+}
+
+.dropdown button svg{
+  width: var(--space-4);
+  height: var(--space-4);
+}
+
+.dropdown button:hover,
+.dropdown button:focus-visible {
+  background-color: var(--color-surface-hover);
+}
+
+.dropdown button:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: -2px;
+}
+
+.dropdown button:active {
+  background-color: var(--color-primary-highlight);
+  color: var(--color-primary);
+}
+
+.searchBox {
+  border: 2px solid transparent;
+  margin-bottom: var(--space-1);
+  padding: calc(var(--space-1) * 1.5);
+}
+
+.searchBox:focus-within {
+  border-color: var(--color-border-focus);
+}
+
+.searchBox input {
+  outline: none;
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-size-md);
+}
+
+.searchBox svg {
+  width: var(--space-4);
+  height: var(--space-4);
+  color: var(--color-primary);
+}
