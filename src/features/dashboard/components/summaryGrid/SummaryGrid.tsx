@@ -1,0 +1,48 @@
+import styles from "./SummaryGrid.module.css";
+import { Table2, CircleCheck, Pencil } from "lucide-react";
+interface SummaryDataType {
+  total?: number;
+  published?: number;
+  drafts?: number;
+}
+interface Props {
+  data?: SummaryDataType;
+}
+
+const SummaryGrid = ({ data }: Props) => {
+  const iconSize = 20;
+  const iconStrokeWidth = 2;
+  return (
+    <div className={`${styles.detailsGrid} stagger-children`}>
+      <div className={styles.gridItem}>
+        <div className={styles.detailsGrid__icon}>
+          <Table2 size={iconSize} strokeWidth={iconStrokeWidth} />
+        </div>
+        <div className={styles.detailsGrid__info}>
+          <p>Total Timetables</p>
+          <h4>{data?.total ?? "—"}</h4>
+        </div>
+      </div>
+      <div className={styles.gridItem}>
+        <div className={`${styles.detailsGrid__icon} ${styles.publishedTb}`}>
+          <CircleCheck size={iconSize} strokeWidth={iconStrokeWidth} />
+        </div>
+        <div className={styles.detailsGrid__info}>
+          <p>Published</p>
+          <h4>{data?.published ?? "—"}</h4>{" "}
+        </div>
+      </div>
+      <div className={styles.gridItem}>
+        <div className={`${styles.detailsGrid__icon} ${styles.draftTb}`}>
+          <Pencil size={iconSize} strokeWidth={iconStrokeWidth} />
+        </div>
+        <div className={styles.detailsGrid__info}>
+          <p>Drafts</p>
+          <h4>{data?.drafts ?? "—"}</h4>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SummaryGrid;

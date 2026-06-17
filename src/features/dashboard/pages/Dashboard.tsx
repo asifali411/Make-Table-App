@@ -1,5 +1,6 @@
 import styles from "../styles/Dashboard.module.css";
 import { Plus } from "lucide-react";
+import SummaryGrid from "../components/summaryGrid/SummaryGrid";
 const Dashboard = () => {
   return (
     <div>
@@ -18,6 +19,7 @@ const Dashboard = () => {
           Create Timetable
         </button>
       </header>
+      <SummaryGrid />
     </div>
   );
 };
