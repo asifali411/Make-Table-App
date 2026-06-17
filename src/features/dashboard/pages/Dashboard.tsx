@@ -7,7 +7,7 @@ const Dashboard = () => {
       <header className={styles.header}>
         <div>
           <h1 className={styles.title}>Dashboard</h1>
-          <p className={styles.subtitle}>Create timetables</p>
+          <p className={styles.subtitle}>Manage your timetable workspace</p>
         </div>
 
         <button
