@@ -1,7 +1,11 @@
 import styles from "../styles/Dashboard.module.css";
 import { Plus } from "lucide-react";
 import SummaryGrid from "../components/summaryGrid/SummaryGrid";
+import { useState } from "react";
+import CreateTimetableDialog from "../components/dialogs/CreateTimetableDialog";
 const Dashboard = () => {
+  const [openCreateTimetableDialog, setOpenCreateClassDialog] =
+    useState<boolean>(false);
   return (
     <div>
       <header className={styles.header}>
@@ -13,13 +17,19 @@ const Dashboard = () => {
         <button
           type="button"
           className={styles.primaryButton}
-          onClick={() => {}}
+          onClick={() => setOpenCreateClassDialog(true)}
         >
           <Plus size={16} strokeWidth={2} />
           Create Timetable
         </button>
       </header>
       <SummaryGrid />
+
+      {/*Create dialog */}
+      <CreateTimetableDialog
+        isVisible={openCreateTimetableDialog}
+        onClose={() => setOpenCreateClassDialog(false)}
+      />
     </div>
   );
 };

@@ -1,0 +1,29 @@
+.CircularCheckBox {
+  --size: 0.9rem;
+  width: var(--size);
+  height: var(--size);
+
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1.5px solid var(--color-border-neutral);
+  background: transparent;
+
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-fast),
+    color var(--transition-base);
+
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.circularcb__checked {
+  color: var(--color-text-inverse);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+}

@@ -12,8 +12,12 @@
 }
 
 @keyframes overlayIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .panel {
@@ -56,7 +60,7 @@
   height: var(--space-5);
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   padding: 0;
   border: none;
   color: var(--color-text-tertiary);
@@ -122,7 +126,9 @@
 }
 
 .createBtn:focus-visible {
-  box-shadow: 0 0 0 2px var(--color-card), 0 0 0 4px var(--color-primary);
+  box-shadow:
+    0 0 0 2px var(--color-card),
+    0 0 0 4px var(--color-primary);
 }
 
 .createBtn {
@@ -144,8 +150,14 @@
   }
 
   @keyframes sheetIn {
-    from { transform: translateY(100%); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
 
   .action {

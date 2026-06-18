@@ -13,7 +13,7 @@ interface CreateDialogProps {
 
   onCreate: () => void;
   onClose: () => void;
-};
+}
 
 // ---------------------------------------------------------------------------------------
 
@@ -26,7 +26,6 @@ const CreateDialog = ({
   onCreate,
   onClose,
 }: CreateDialogProps) => {
-
   useEffect(() => {
     if (open) document.getElementById("root")?.setAttribute("inert", "true");
 
@@ -34,7 +33,7 @@ const CreateDialog = ({
       if (e.key === "Escape" && open) {
         document.getElementById("root")?.removeAttribute("inert");
         onClose();
-      };
+      }
     };
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
@@ -53,8 +52,8 @@ const CreateDialog = ({
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           document.getElementById("root")?.removeAttribute("inert");
-          onClose()
-        };
+          onClose();
+        }
       }}
     >
       <div className={styles.panel}>
@@ -63,10 +62,12 @@ const CreateDialog = ({
             {title}
           </h2>
 
-          <button onClick={() => {
-            document.getElementById("root")?.removeAttribute("inert");
-            onClose();
-          }}>
+          <button
+            onClick={() => {
+              document.getElementById("root")?.removeAttribute("inert");
+              onClose();
+            }}
+          >
             <X />
           </button>
         </div>
@@ -80,7 +81,7 @@ const CreateDialog = ({
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };
 
