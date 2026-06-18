@@ -3,8 +3,16 @@
   grid-template-columns: 1fr 1fr;
   background-color: var(--color-bg);
   padding: 5rem 10vw;
+  transform: translateY(40px);
+  opacity: 0;
+  animation: fadeUp 0.3s linear forwards;
 }
-
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .brand {
   display: flex;
   align-items: center;
@@ -75,11 +83,12 @@
   border-radius: 50%;
   filter: blur(150px);
   opacity: 0.85;
+  z-index: 10;
 }
 
 .blob1 {
-  top: -110px;
-  left: -100px;
+  top: 0px;
+  left: 0px;
   width: 500px;
   height: 500px;
   filter: blur(190px);
