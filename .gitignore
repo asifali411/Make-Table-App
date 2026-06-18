@@ -64,3 +64,6 @@ test-results/
 *.msi.zip
 *.app.tar.gz
 *.AppImage.tar.gz
+
+#prettier
+.prettierignore

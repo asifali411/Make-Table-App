@@ -6,15 +6,11 @@ import Navbar from "../../shared/components/navbar/Navbar";
 const Login = lazy(() => import("../../features/auth/pages/Login"));
 const Register = lazy(() => import("../../features/auth/pages/Register"));
 
-const Dashboard = lazy(
-  () => import("../../features/dashboard/pages/Dashboard"),
-);
+const Dashboard = lazy(() => import("../../features/dashboard/pages/Dashboard"));
 const Classes = lazy(() => import("../../features/classes/pages/Classes"));
 const Subjects = lazy(() => import("../../features/subjects/pages/Subjects"));
 const Teachers = lazy(() => import("../../features/teachers/pages/Teachers"));
-const Assignments = lazy(
-  () => import("../../features/assignments/pages/Assignments"),
-);
+const Assignments = lazy(() => import("../../features/assignments/pages/Assignments"));
 
 // Placeholders
 const Loading = () => <div>LOADING</div>;
