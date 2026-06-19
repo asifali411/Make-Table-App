@@ -6,7 +6,7 @@ import {
   Link2,
   Settings,
   CircleHelp,
-  Calendar,
+  School2,
   type LucideProps,
 } from "lucide-react";
 import { useState } from "react";
@@ -37,6 +37,7 @@ const menuItems: MenuItem[] = [
     icon: LayoutDashboard,
     active: true,
   },
+  { href: "/rooms", label: "Rooms", icon: School2 },
   { href: "/classes", label: "Classes", icon: BookOpen },
   { href: "/subjects", label: "Subjects", icon: GraduationCap },
   { href: "/teachers", label: "Teachers", icon: Users },

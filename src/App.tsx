@@ -11,8 +11,11 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    //navigate("/login"); well fuck u ali ;) im a good guy so i commented it out
-    //navigate("/dashboard"); ig i just violated your rules.. commented codes.. sry love.. dont punish me
+    // the root of our application is not '/' but '/dashboard'
+    // this is used to ensure proper rendering of breadcrumbs
+    // hence when we open the app, we immediately redirect to '/dashboard'
+    // IMPORTANT: '/' should'nt be reachable
+    navigate("/dashboard");
   }, []);
 
   return (
