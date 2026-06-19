@@ -1,13 +1,13 @@
 import { createPortal } from "react-dom";
 import styles from "../styles/DropdownBody.module.css";
-import { Option } from "../types/searchableDropdown.type";
 import { useEffect, useRef, useState } from "react";
 import { Search, CheckIcon } from "lucide-react";
 import { similarity } from "../../../utils/searchAlgorithm";
 
 interface DropdownBodyProps {
   open: boolean;
-  options: Option[];
+  options: string[];
+  defaultValue?: string;
   placeholder?: string;
   style?: React.CSSProperties;
   ref: any;
@@ -18,6 +18,7 @@ interface DropdownBodyProps {
 const DropdownBody = ({
   open,
   options,
+  defaultValue,
   placeholder = "",
   style = {},
   ref,
@@ -27,10 +28,8 @@ const DropdownBody = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState(
-    options.find((opt) => opt.isSelected)?.label ?? "",
-  );
-  const [items, setItems] = useState<Option[]>(options);
+  const [selected, setSelected] = useState(defaultValue);
+  const [items, setItems] = useState<string[]>(options);
 
   const handleSearch = (query: string) => {
     setSearch(query);
@@ -41,7 +40,7 @@ const DropdownBody = ({
 
     setItems(
       options.filter(
-        (opt) => similarity(opt.label.toLowerCase(), query.toLowerCase()) > 0.2,
+        (opt) => similarity(opt, query) > 0.2,
       ),
     );
   };
@@ -49,6 +48,10 @@ const DropdownBody = ({
   const handleSelect = (label: string) => {
     setSelected(label);
     onSelect(label);
+  };
+
+  const isSelected = (option: string) => {
+    return selected && selected === option;
   };
 
   useEffect(() => {
@@ -78,15 +81,15 @@ const DropdownBody = ({
       </div>
       <ol>
         {items.map((opt) => (
-          <li key={opt.label}>
+          <li key={opt}>
             <button
               type="button"
               onMouseDown={(e) => e.preventDefault()}
-              onClick={() => handleSelect(opt.label)}
-              className={`${selected === opt.label ? styles.selected : ""}`}
+              onClick={() => handleSelect(opt)}
+              className={`${isSelected(opt) ? styles.selected : ""}`}
             >
-              {selected === opt.label ? <CheckIcon /> : ""}
-              {opt.label}
+              {isSelected(opt) ? <CheckIcon /> : ""}
+              {opt}
             </button>
           </li>
         ))}

@@ -2,7 +2,6 @@ import { useState } from "react";
 import Checkbox from "../../../shared/components/checkbox/Checkbox";
 import CreateDialog from "../../../shared/components/create-dialog/CreateDialog";
 import SearchableDropdown from "../../../shared/components/searchable-dropdown/SearchableDropdown";
-import { Option } from "../../../shared/components/searchable-dropdown/types/searchableDropdown.type";
 import styles from "../styles/Dialog.module.css";
 
 interface AssignmentForm {
@@ -18,29 +17,28 @@ interface CreateAssignmentDialogProps {
   onClose: () => void;
 }
 
-// TODO: change options to strings as it has only one argument
-const TEACHERS: Option[] = [
-  { label: "Dr. Smith" },
-  { label: "Dr. Jones" },
-  { label: "Prof. Kumar" },
-  { label: "Ms. Davis" },
+const TEACHERS: string[] = [
+  "Dr. Smith",
+  "Dr. Jones",
+  "Prof. Kumar",
+  "Ms. Davis",
 ];
 
-const CLASSES: Option[] = [
-  { label: "CSE A" },
-  { label: "CSE B" },
-  { label: "CSE LAB" },
+const CLASSES: string[] = [
+  "CSE A",
+  "CSE B",
+  "CSE LAB",
 ];
 
-const SUBJECTS: Option[] = [
-  { label: "Mathematics" },
-  { label: "Physics" },
-  { label: "English" },
+const SUBJECTS: string[] = [
+  "Mathematics",
+  "Physics",
+  "English",
 ];
 
-const ROLES: Option[] = [
-  { label: "Class Teacher" },
-  { label: "Subject Teacher" },
+const ROLES: string[] = [
+  "Class Teacher",
+  "Subject Teacher",
 ];
 
 const DAYS: string[] = ["Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -65,6 +63,7 @@ const CreateAssignmentDialog = ({
 
   const validate = () => {
     // TODO: validate form
+    console.log(form);
     
     return true;
   };
@@ -136,36 +135,40 @@ const CreateAssignmentDialog = ({
         }}
       />
 
-      <label className={styles.label}>Moring Class Days</label>
-      <div className={styles.row}>
-        {DAYS.map((day) => (
-          <Checkbox
-            key={day}
-            label={day}
-            onChange={(value) => {
-              if (value) {
-                setForm((prev) => {
-                  const newDays = prev.days;
-                  newDays?.push(day);
-                  return {
-                    ...prev,
-                    days: newDays,
-                  };
-                });
-              } else {
-                setForm((prev) => {
-                  const newDays = prev.days;
-                  newDays?.slice(newDays.indexOf(day), 1);
-                  return {
-                    ...prev,
-                    days: newDays,
-                  };
-                });
-              }
-            }}
-          />
-        ))}
-      </div>
+      {form.role?.startsWith("Class") && (
+        <>
+          <label className={styles.label}>Moring Class Days</label>
+          <div className={styles.row}>
+            {DAYS.map((day) => (
+              <Checkbox
+                key={day}
+                label={day}
+                onChange={(value) => {
+                  if (value) {
+                    setForm((prev) => {
+                      const newDays = prev.days ?? [];
+                      newDays?.push(day);
+                      return {
+                        ...prev,
+                        days: Array.from(new Set(newDays)),
+                      };
+                    });
+                  } else {
+                    setForm((prev) => {
+                      const newDays = prev.days ?? [];
+                      newDays?.slice(newDays.indexOf(day), 1);
+                      return {
+                        ...prev,
+                        days: Array.from(new Set(newDays)),
+                      };
+                    });
+                  }
+                }}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </CreateDialog>
   );
 };

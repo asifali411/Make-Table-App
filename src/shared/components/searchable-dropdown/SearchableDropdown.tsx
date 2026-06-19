@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import DropdownBody from "./components/DropdownBody";
-import { Option } from "./types/searchableDropdown.type";
 import styles from "./styles/SearchableDropdown.module.css";
 import { ChevronDown } from "lucide-react";
 
 interface SearchableDropdownProps {
-  options: Option[];
+  options: string[];
+  defaultValue?: string;
   style?: React.CSSProperties;
   label: string,
   emptyPlaceholder?: string;
@@ -16,6 +16,7 @@ interface SearchableDropdownProps {
 
 const SearchableDropdown = ({
   options,
+  defaultValue,
   style,
   label = "",
   emptyPlaceholder = "Select an option",
@@ -29,9 +30,7 @@ const SearchableDropdown = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const [selected, setSelected] = useState(
-    options.find((opt) => opt.isSelected)?.label ?? emptyPlaceholder
-  );
+  const [selected, setSelected] = useState(defaultValue);
 
   const updatePosition = useCallback(() => {
     if (!wrapperRef.current) return;
@@ -103,7 +102,7 @@ const SearchableDropdown = ({
         <label>{label}</label>
         <div className={styles.selecter}>
           <span>
-            {selected}
+            {selected ?? emptyPlaceholder}
           </span>
           <ChevronDown />
         </div>
