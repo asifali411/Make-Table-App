@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { ViewMode } from "../../../shared/types/global.types";
 import PageHeader from "../../../shared/components/page-header/PageHeader";
+import CreateAssignmentDialog from "../components/CreateAssignmentDialog";
 
 const TIMETABLE_NAME = "Timetable-2026"
 
 const Assignments = () => {
 
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
+  const [openCreateAssignmentDialog, setOpenCreateAssignmentDialog] = useState(false);
 
   return (
     <>
@@ -17,8 +19,13 @@ const Assignments = () => {
         addLabel="Add Assignment"
         importLabel="Import"
         onViewModeChange={(mode) => setViewMode(mode)}
-        onAdd={() => {}}
+        onAdd={() => setOpenCreateAssignmentDialog(true)}
         onImport={() => {}}
+      />
+
+      <CreateAssignmentDialog
+        open={openCreateAssignmentDialog}
+        onClose={() => setOpenCreateAssignmentDialog(false)}
       />
     </>
   );
